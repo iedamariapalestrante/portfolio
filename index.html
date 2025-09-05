@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Palestrante • Portfólio</title>
+  <meta name="description" content="Landing page/portfólio moderno e responsivo para palestrante." />
+
+  <!-- Fonte moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand: #ff5757;
+      --brand-700: #e74a4a;
+      --brand-900: #c73a3a;
+      --bg: #0b0b0d;
+      --surface: #121216;
+      --text: #f7f7f7;
+      --muted: #b8b8c2;
+      --card: #16161c;
+      --border: #26262e;
+      --ok: #25d366;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(255, 87, 87, 0.12), transparent 60%),
+                  radial-gradient(900px 600px at -20% 10%, rgba(255, 87, 87, 0.08), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-weight: 700; letter-spacing: 0.4px; font-size: 14px;
+    }
+    .logo img { width: 34px; height: 34px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border); background: #000; }
+
+    /* Social icons */
+    .social { display: flex; gap: 14px; }
+    .social a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); text-decoration: none; }
+    .social a:hover { border-color: var(--brand); transform: translateY(-1px); transition: 180ms ease; }
+    .social svg { width: 18px; height: 18px; fill: none; stroke: #fff; opacity: 0.9; }
+
+    /* Hero */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 56px 20px 18px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; }
+    .eyebrow { display: inline-block; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
+    h1 { margin: 14px 0 16px; font-size: clamp(28px, 4.6vw, 56px); line-height: 1.08; }
+    .lead { color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .btn {
+      --_bg: var(--brand);
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 18px; border-radius: 14px; border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--_bg), var(--brand-700));
+      color: #fff; font-weight: 700; text-decoration: none; letter-spacing: 0.2px;
+      box-shadow: 0 10px 22px rgba(255, 87, 87, 0.24), inset 0 1px rgba(255,255,255,0.15);
+    }
+    .btn.secondary { --_bg: #1a1a20; background: linear-gradient(180deg, #1a1a20, #121216); color: #fff; }
+    .btn:hover { transform: translateY(-2px); transition: 220ms cubic-bezier(.2,.7,.2,1); }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      border: 1px solid var(--border); border-radius: 22px; padding: 22px; position: relative; overflow: hidden;
+    }
+    .hero-card::after { content: ""; position: absolute; inset: -40% -20% auto auto; width: 340px; height: 340px; background: radial-gradient(closest-side, rgba(255,87,87,0.25), transparent); filter: blur(18px); opacity: .7; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hero-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; border: 1px solid var(--border); }
+
+    /* Section wrapper */
+    section { padding: 64px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 14px; }
+    .section-desc { color: var(--muted); margin-bottom: 24px; }
+
+
+
+    /* Trajetória */
+    .timeline { display: grid; gap: 16px; }
+    .step { display: grid; grid-template-columns: 16px 1fr; gap: 16px; align-items: start; }
+    .dot { width: 16px; height: 16px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(255,87,87,0.12); margin-top: 8px; }
+    .step-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
+    .step h4 { margin: 2px 0 6px; }
+    .step p { color: var(--muted); margin: 0; }
+
+    /* Video Grids */
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .grid.four { grid-template-columns: repeat(4, 1fr); }
+
+    .video-wrap { position: relative; width: 100%; overflow: hidden; border-radius: 16px; border: 1px solid var(--border); background: #000; }
+    .ratio-16x9 { aspect-ratio: 16/9; }
+    .ratio-9x16 { aspect-ratio: 9/16; }
+    .video-wrap iframe,
+    .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    /* Livro */
+    .book { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 24px; align-items: center;}
+    .book-cover { border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: #0f0f13; }
+    .book-cover img { display: block; width: 100%; height: auto; object-fit: cover; }
+    .book .meta { color: var(--muted); margin-top:-10px;}
+    .book .section-title {margin-top:-2220px;}
+    .book p {font-size: 15px; margin-top:-10px}
+
+    .cta-banner { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* Footer CTA */
+    .cta-final { text-align: center; background: linear-gradient(180deg, rgba(255,87,87,0.07), rgba(255,87,87,0.02)); border-top: 1px solid var(--border); }
+    .cta-final .wrap { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
+    .cta-final h3 { font-size: clamp(22px, 3.2vw, 36px); margin: 0 0 12px; }
+    .cta-final p { color: var(--muted); margin-bottom: 18px; }
+
+    /* Utilities */
+    .muted { color: var(--muted); }
+    .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 12px; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .book { grid-template-columns: 1fr; }
+      .grid.four { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .grid.two { grid-template-columns: 1fr; }
+      .grid.four { grid-template-columns: 1fr; }
+      .social a { width: 34px; height: 34px; }
+    }
+
+    @media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; }
+  .book { grid-template-columns: 1fr; }
+  .grid.four { grid-template-columns: repeat(2, 1fr); }
+
+  /* 🔥 Ajuste da seção Sobre Mim */
+  #sobre .container {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  #sobre .book-cover {
+    max-width: 320px;
+    margin: 0 auto 24px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header simples: logo à esquerda + ícones sociais à direita -->
+  <header>
+    <nav class="nav">
+      <a class="logo" href="#top" aria-label="Início">
+        <!-- Substitua o src abaixo pela imagem do logo -->
+        <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-04-140129-1.png" alt="Logo" />
+        <span>IEDA MARIA GONÇALVES</span>
+      </a>
+      <span></span>
+      <div class="social" aria-label="Redes sociais">
+        <a href="https://instagram.com/iedamariapalestrante" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <!-- IG icon -->
+          <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/iedamaria.goncalves" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+          <!-- FB icon -->
+          <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="www.linkedin.com/in/ieda-maria-gonçalves-a413a825?originalSubdomain=br" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <!-- IN icon -->
+          <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO / Apresentação -->
+  <main id="top">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Apresentação</span>
+        <h1>Ieda Maria Gonçalves</h1>
+        <p class="lead">Palestrante, autora e comunicadora. Impacta pessoas e organizações com conteúdo prático, histórias reais e energia no palco. Foco em <strong>liderança</strong>, <strong>inovação</strong> e <strong>comunicação</strong>.</p>
+        <div class="cta-row">
+          <a class="btn" href="#cta-livro">Comprar o Livro</a>
+          <a class="btn secondary" href="#convites">Convidar para Palestras</a>
+        </div>
+        <div style="margin-top:14px" class="muted">Disponível para palestras, entrevistas e eventos corporativos.</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-grid">
+          <!-- Substitua as imagens pelo retrato da palestrante / bastidores -->
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-05-170241.png" alt="Palestra 1" />
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-05-170258.png" alt="Palestra 2" />
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-05-170357.png" alt="Backstage" />
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-05-170540.png" alt="Workshop" />
+        </div>
+      </div>
+    </section>
+
+      <!-- Sobre Mim -->
+    <section id="sobre" class="reveal">
+      <div class="container" style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:32px; align-items:center;">
+        <div class="book-cover">
+          <!-- Substitua pela foto da palestrante -->
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Captura-de-tela-2025-09-04-140129-1.png" alt="Foto da Palestrante" />
+        </div>
+        <div>
+          <span class="pill">Sobre Mim</span>
+          <h2 class="section-title" style="margin-top:10px">Quem Sou</h2>
+          <p>
+            Sou psicanalista especializada em diversas abordagens terapêuticas inovadoras,
+            que combinam o conhecimento da medicina tradicional com as mais recentes
+            descobertas da medicina quântica. Minha jornada profissional é marcada pela
+            busca contínua de um entendimento mais profundo da mente e do corpo.
+          </p>
+          <p>
+            Ao longo dos anos, dediquei-me intensamente ao estudo da física quântica com
+            mestres renomados, mergulhando nas fronteiras da ciência que explora as
+            interações fundamentais da matéria e da energia.
+          </p>
+          <p>
+            Também explorei a aplicação prática desses conceitos na área da saúde e do
+            bem-estar, participando de congressos com grandes referências, como Deepak
+            Chopra, Valentina Onisor e Amit Goswami. Nesse caminho, especializei-me em
+            Terapia de Liberação Emocional (EFT), Medicina Germânica, Matrix Reimprinting e Reiki.
+          </p>
+          <p>
+            Minha formação em Psicanálise pelo Instituto Brasileiro de Ciências e
+            Psicanálise (IBCP) complementa essa abordagem holística, permitindo uma
+            compreensão mais profunda das conexões entre mente, emoções e saúde física.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trajetória profissional -->
+    <section id="trajetoria" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Trajetória Profissional</h2>
+        <p class="section-desc">Uma linha do tempo com marcos que moldaram a carreira.</p>
+        <div class="timeline">
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="step-card">
+              <h4>1998 a 2013 - Representante Comercial em Artes
+Gráficas</h4>
+              
+            </div>
+          </div>
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="step-card">
+              <h4>2013 - Estudante de Psicanálise e Física Quântica</h4>
+             
+            </div>
+          </div>
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="step-card">
+              <h4>2018 - Aberturado meu primeiro consultório</h4>
+              
+            </div>
+          </div>
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div class="step-card">
+              <h4>2025 — Início da Jornada como Palestrante</h4>
+              <p>Descrição da trajetória</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 vídeos 16:9 lado a lado -->
+    <section id="videos-169" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Vídeos em Destaque</h2>
+        <p class="section-desc">Convites para conversas e palestras realizadas.</p>
+        <div class="grid two">
+          <div class="video-wrap ratio-16x9">
+            <!-- Substitua o src pelo link do vídeo (YouTube, Vimeo etc.) -->
+            <iframe src="" title="Vídeo 16:9 A" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-wrap ratio-16x9">
+            <iframe src="" title="Vídeo 16:9 B" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 vídeos 9:16 estilo Reels -->
+    <section id="reels" class="reveal">
+      <div class="container">
+        <h2 class="section-title">Reels & Shorts</h2>
+        <p class="section-desc">Conteúdos das minhas redes sociais</p>
+        <div class="grid four">
+          <div class="video-wrap ratio-9x16">
+            <iframe src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Retribuo-o-carinho-que-recebi-de-todos-Muito-grata-🙏🏼-Novo-ciclo-novas-conexoes-e-muitas-ben.mp4" title="Reel 1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-wrap ratio-9x16">
+            <iframe src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/get.mp4" title="Reel 2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-wrap ratio-9x16">
+            <iframe src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/Qual-e-a-sua-verdade-❓Voce-reflete-sobre-isso-🚀Todo-movimento-da-vida-exige-uma-reflexao-🤔A-v.mp4" title="Reel 3" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-wrap ratio-9x16">
+            <iframe src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/ig_video_1757104160.mp4" title="Reel 4" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Livro (capa + texto ao lado) -->
+    <section id="livro" class="reveal">
+      <div class="container book">
+        <div class="book-cover">
+          <!-- Substitua pela foto da capa do livro -->
+          <img src="https://horizonstudiosbr.com/wp-content/uploads/2025/09/livro.png" alt="Capa do livro" />
+        </div>
+        <div>
+          <span class="pill">Livro</span>
+          <h2 class="section-title" style="margin-top:10px">Parece que me casei com meu pai</h2>
+          <p class="meta">Publicado em 2025 / Desenvolvimento Pessoal</p>
+          <p>Uma obra direta ao ponto, com frameworks práticos para acelerar a sua comunicação, liderar com autenticidade e transformar equipes em alta performance. Histórias reais, exercícios e casos para aplicar no dia a dia.</p>
+          <div class="cta-banner" id="cta-livro">
+            <a class="btn" href="https://api.whatsapp.com/send?phone=5511982265798" target="_blank" rel="noopener">
+              Comprar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA final para convites -->
+    <section id="convites" class="cta-final reveal">
+      <div class="wrap">
+        <h3>Quer levar a palestra para seu evento?</h3>
+        <p>Convites para <strong>palestras, entrevistas e keynotes</strong>. Envie sua mensagem com data, cidade e público estimado.</p>
+        <div class="cta-row" style="justify-content:center">
+          <a class="btn" href="mailto:iedagoncalves264@gmail.com?subject=Convite%20para%20Palestra">
+            Falar por E-mail
+          </a>
+          <a class="btn secondary" href="https://api.whatsapp.com/send?phone=5511982265798" target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);">
+    <div class="container" style="padding: 26px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <span class="muted">© <span id="year"></span> Ieda Maria Gonçalves</span>
+      <span class="muted">Desenvolvido por <strong>HRZN Interactive Studios</strong></span>
+    </div>
+  </footer>
+
+  <script>
+    // Atualiza ano do rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animação de entrada simples (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) e.target.classList.add('in');
+      }
+    }, { threshold: 0.16 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Helper: cole rapidamente links de vídeo
+    // Exemplo: setVideo('#videos-169 iframe:nth-child(1)', 'https://www.youtube.com/embed/xxxxxxxx');
+    function setVideo(selector, url){
+      const el = document.querySelector(selector);
+      if (!el) return;
+      el.src = url;
+      el.loading = 'lazy';
+      el.referrerPolicy = 'strict-origin-when-cross-origin';
+    }
+    window.setVideo = setVideo; // disponível no console
+  </script>
+</body>
+</html>
